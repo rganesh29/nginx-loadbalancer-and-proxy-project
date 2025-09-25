@@ -1,0 +1,44 @@
+services:
+  frontend1:
+    build:
+      context: .
+      dockerfile: ./nginx.Dockerfile
+    container_name: frontend1
+    ports:
+      - 80
+    networks:
+      - webservers
+  
+  frontend2:
+    build: 
+      context: .
+      dockerfile: ./nginx.Dockerfile
+    container_name: frontend2
+    ports:
+      - 80
+    networks:
+      - webservers
+  
+  frontend3:
+    build:
+      context: .
+      dockerfile: ./nginx.Dockerfile
+    container_name: frontend3
+    ports:
+      - 80
+    networks:
+      - webservers
+
+  proxy:
+    build:
+      context: .
+      dockerfile: ./proxy.Dockerfile
+    container_name: reverse_proxy_server
+    ports:
+      - 9000:80
+    networks:
+      - webservers
+
+networks:
+  webservers:
+      driver: bridge
